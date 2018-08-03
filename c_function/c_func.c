@@ -853,6 +853,9 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 #define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
 #endif
 
+/* GetBuiltinName.proto */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name);
+
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
@@ -954,9 +957,11 @@ extern int __pyx_module_is_main_c_func;
 int __pyx_module_is_main_c_func = 0;
 
 /* Implementation of 'c_func' */
+static PyObject *__pyx_builtin_range;
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_Asdil[] = "Asdil";
+static const char __pyx_k_range[] = "range";
 static const char __pyx_k_author[] = "__author__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_File_Name_c_func_Description_Au[] = "\n-------------------------------------------------\n   File Name\357\274\232     c_func\n   Description :\n   Author :        Asdil\n   date\357\274\232          2018/8/2\n-------------------------------------------------\n   Change Activity:\n                   2018/8/2:\n-------------------------------------------------\n";
@@ -964,6 +969,7 @@ static PyObject *__pyx_n_s_Asdil;
 static PyObject *__pyx_n_s_author;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_6c_func_fib_in_c(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_n); /* proto */
 /* Late includes */
@@ -972,59 +978,84 @@ static PyObject *__pyx_pf_6c_func_fib_in_c(CYTHON_UNUSED PyObject *__pyx_self, i
  * __author__ = 'Asdil'
  * 
  * cpdef int fib_in_c(int n):             # <<<<<<<<<<<<<<
- *     if n < 2:
- *         return n
+ *     cdef int i = 0
+ *     for _ in range(n):
  */
 
 static PyObject *__pyx_pw_6c_func_1fib_in_c(PyObject *__pyx_self, PyObject *__pyx_arg_n); /*proto*/
 static int __pyx_f_6c_func_fib_in_c(int __pyx_v_n, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v__;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  int __pyx_t_5;
+  int __pyx_t_6;
   __Pyx_RefNannySetupContext("fib_in_c", 0);
 
   /* "c_func.pyx":16
  * 
  * cpdef int fib_in_c(int n):
- *     if n < 2:             # <<<<<<<<<<<<<<
- *         return n
- *     return fib_in_c(n-2) + fib_in_c(n-1)
+ *     cdef int i = 0             # <<<<<<<<<<<<<<
+ *     for _ in range(n):
+ *         for _ in range(n):
  */
-  __pyx_t_1 = ((__pyx_v_n < 2) != 0);
-  if (__pyx_t_1) {
+  __pyx_v_i = 0;
 
-    /* "c_func.pyx":17
+  /* "c_func.pyx":17
  * cpdef int fib_in_c(int n):
- *     if n < 2:
- *         return n             # <<<<<<<<<<<<<<
- *     return fib_in_c(n-2) + fib_in_c(n-1)
+ *     cdef int i = 0
+ *     for _ in range(n):             # <<<<<<<<<<<<<<
+ *         for _ in range(n):
+ *             i += 1
  */
-    __pyx_r = __pyx_v_n;
-    goto __pyx_L0;
+  __pyx_t_1 = __pyx_v_n;
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v__ = __pyx_t_3;
 
-    /* "c_func.pyx":16
+    /* "c_func.pyx":18
+ *     cdef int i = 0
+ *     for _ in range(n):
+ *         for _ in range(n):             # <<<<<<<<<<<<<<
+ *             i += 1
+ *     return i
+ */
+    __pyx_t_4 = __pyx_v_n;
+    __pyx_t_5 = __pyx_t_4;
+    for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
+      __pyx_v__ = __pyx_t_6;
+
+      /* "c_func.pyx":19
+ *     for _ in range(n):
+ *         for _ in range(n):
+ *             i += 1             # <<<<<<<<<<<<<<
+ *     return i
  * 
- * cpdef int fib_in_c(int n):
- *     if n < 2:             # <<<<<<<<<<<<<<
- *         return n
- *     return fib_in_c(n-2) + fib_in_c(n-1)
  */
+      __pyx_v_i = (__pyx_v_i + 1);
+    }
   }
 
-  /* "c_func.pyx":18
- *     if n < 2:
- *         return n
- *     return fib_in_c(n-2) + fib_in_c(n-1)             # <<<<<<<<<<<<<<
+  /* "c_func.pyx":20
+ *         for _ in range(n):
+ *             i += 1
+ *     return i             # <<<<<<<<<<<<<<
+ * 
+ * # def fib_in_c(n):
  */
-  __pyx_r = (__pyx_f_6c_func_fib_in_c((__pyx_v_n - 2), 0) + __pyx_f_6c_func_fib_in_c((__pyx_v_n - 1), 0));
+  __pyx_r = __pyx_v_i;
   goto __pyx_L0;
 
   /* "c_func.pyx":15
  * __author__ = 'Asdil'
  * 
  * cpdef int fib_in_c(int n):             # <<<<<<<<<<<<<<
- *     if n < 2:
- *         return n
+ *     cdef int i = 0
+ *     for _ in range(n):
  */
 
   /* function exit code */
@@ -1121,11 +1152,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_author, __pyx_k_author, sizeof(__pyx_k_author), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 17, __pyx_L1_error)
   return 0;
+  __pyx_L1_error:;
+  return -1;
 }
 
 static int __Pyx_InitCachedConstants(void) {
@@ -1453,6 +1488,20 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
     return PyObject_GetAttr(obj, attr_name);
 }
 #endif
+
+/* GetBuiltinName */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
+    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
+    if (unlikely(!result)) {
+        PyErr_Format(PyExc_NameError,
+#if PY_MAJOR_VERSION >= 3
+            "name '%U' is not defined", name);
+#else
+            "name '%.200s' is not defined", PyString_AS_STRING(name));
+#endif
+    }
+    return result;
+}
 
 /* PyErrFetchRestore */
 #if CYTHON_FAST_THREAD_STATE

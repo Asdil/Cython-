@@ -13,6 +13,17 @@
 __author__ = 'Asdil'
 
 cpdef int fib_in_c(int n):
-    if n < 2:
-        return n
-    return fib_in_c(n-2) + fib_in_c(n-1)
+    cdef int i = 0
+    for _ in range(n):
+        for _ in range(n):
+            i += 1
+    return i
+
+# def fib_in_c(n):
+#     i = 0
+#     for _ in range(n):
+#         for _ in range(n):
+#             i += 1
+#     return i
+
+# python setup.py build_ext --inplace
